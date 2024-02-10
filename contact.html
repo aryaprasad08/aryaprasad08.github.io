@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Miami Nature Trails</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        header {
+            background: url('shawn-henley-3CQQlwWpn70-unsplash.jpg') no-repeat center center/cover; /* Consider adding a nature-related background image */
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .overlay-text {
+            background-color: rgba(0, 77, 64, 0.8); /* For better readability */
+            padding: 20px;
+            border-radius: 5px;
+            display: inline-block;
+            max-width: 800px;
+        }
+        .contact-form {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        .contact-form label,
+        .contact-form input,
+        .contact-form textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .contact-form input[type="submit"] {
+            cursor: pointer;
+            background-color: #00695c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .contact-form input[type="submit"]:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="overlay-text">
+            <h1>Contact Miami Nature Trails</h1>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="trails.html">Trails</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="overlay-text" style="background-color: rgba(255, 255, 255, 0.9); color: #333; margin: 20px; border-radius: 10px;">
+            <h2>We'd love to hear from you!</h2>
+            <form class="contact-form" action="#">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Miami Nature Trails</p>
+    </footer>
+</body>
+</html>
