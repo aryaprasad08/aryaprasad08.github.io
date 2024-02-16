@@ -61,26 +61,25 @@
 </div>
 
 <script>
-    // Associative array for item names and prices
+    // Item names and prices
     const PRICES = {
         hotdog: 4.65,
         fries: 3.75,
         soda: 1.89
     };
 
-    // Associative array for item names and quantities
+    // Item names and quantities
     let quantities = {
         hotdog: 0,
         fries: 0,
         soda: 0
     };
 
-    // Loop to get the quantities from the user
+    // get quantities from the user
     for (let item in quantities) {
         quantities[item] = parseInt(prompt(`How many ${item}s do you want?`), 10) || 0;
     }
 
-    // format money values
     function showMoney(amount) {
         let rounded = Math.round(amount * 100);
         let dollars = Math.floor(rounded / 100);
@@ -89,7 +88,6 @@
         return `${dollars}.${cents}`;
     }
 
-    // Loop to do the subtotal calculation
     let subtotal = 0;
     for (let item in quantities) {
         subtotal += quantities[item] * PRICES[item];
