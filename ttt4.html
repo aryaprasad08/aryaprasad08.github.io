@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe - Part 4</title>
+    <style>
+        body {
+            background-color: #8B0000; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .board-container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+            margin: 20px 0;
+        }
+        .square {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            border: 2px solid #000;
+            background-color: #fff; 
+        }
+        .square:hover {
+            background-color: lightgrey;
+        }
+        #turnIndicator, #winCondition, button {
+            background-color: #640000; 
+            color: #fff;
+            padding: 10px;
+            border: none;
+            margin-top: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        h1 {
+            background: linear-gradient(to right, #993333, #b33333); 
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-shadow: 2px 2px 4px #000000; 
+            margin: 0 auto;
+            width: max-content; 
+            box-shadow: 0px 4px 6px -1px rgba(0,0,0,0.3); 
+        }
+    </style>
+</head>
+<body>
+
+<div class="board-container">
+    <h1>Tic Tac Toe</h1>
+    <div id="gameBoard" class="board">
+        <script>
+        const NUM_SQUARES = 9;
+        for (let i = 0; i < NUM_SQUARES; i++) {
+            let id = "sq" + i;
+            document.write("<div class='square' id='" + id + "'></div>");
+        }
+        </script>
+    </div>
+    <div id="turnIndicator">Player X's Turn</div>
+    <div id="winCondition" style="display: none;">Win Condition Display</div>
+    <button id="startGameButton">Start Game</button>
+</div>
+
+<script>
+let currentPlayer = Math.random() < 0.5 ? 'X' : 'O'; 
+document.getElementById('turnIndicator').textContent = 'Player ' 
+                                                + currentPlayer + '\'s Turn';
+
+
+document.querySelectorAll('.square').forEach(square => {
+    square.addEventListener('click', handleSquareClick);
+});
+
+ 
+const startButton = document.getElementById('startGameButton');
+startButton.addEventListener('click', () => {
+    document.querySelectorAll('.square').forEach(square => {
+        square.textContent = ''; 
+    });
+    currentPlayer = Math.random() < 0.5 ? 'X' : 'O'; 
+    document.getElementById('turnIndicator').textContent = 'Player ' 
+                                                + currentPlayer + '\'s Turn';
+    document.getElementById('winCondition').style.display = 'none';
+    document.querySelectorAll('.square').forEach(square => {
+        square.addEventListener('click', handleSquareClick); 
+    });
+});
+
+
+function handleSquareClick(event) {
+    const square = event.target;
+    if (square.textContent === '') { 
+        square.textContent = currentPlayer;
+        
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        document.getElementById('turnIndicator').textContent = 'Player ' 
+                                                + currentPlayer + '\'s Turn';
+    }
+}
+
+
+function checkWinOrStalemate() {
+    const moves = [];
+    document.querySelectorAll('.square').forEach(square => {
+        moves.push(square.textContent || '-');
+    });
+
+    const winConditions = [
+        moves[0] + moves[1] + moves[2],
+        moves[3] + moves[4] + moves[5],
+        moves[6] + moves[7] + moves[8],
+        moves[0] + moves[3] + moves[6],
+        moves[1] + moves[4] + moves[7],
+        moves[2] + moves[5] + moves[8],
+        moves[0] + moves[4] + moves[8],
+        moves[2] + moves[4] + moves[6],
+    ];
+
+    // Check for a win
+    let gameWon = false;
+    winConditions.forEach(condition => {
+        if (condition === 'XXX' || condition === 'OOO') {
+            gameWon = true;
+            document.getElementById('winCondition').style.display = 'block';
+            document.getElementById('winCondition').textContent = 
+                                                currentPlayer + ' Wins!';
+        }
+    });
+
+    // Check for a stalemate
+    if (!gameWon && !moves.includes('-')) {
+        document.getElementById('winCondition').style.display = 'block';
+        document.getElementById('winCondition').textContent = 'Stalemate!';
+    }
+
+    // Game over
+    if (gameWon || !moves.includes('-')) {
+        document.querySelectorAll('.square').forEach(square => {
+            square.removeEventListener('click', handleSquareClick);
+        });
+    }
+}
+
+
+function handleSquareClick(event) {
+    const square = event.target;
+    if (square.textContent === '') {
+        square.textContent = currentPlayer;
+        alert('Square ' + square.id.substring(2) + ' was clicked');
+        
+        checkWinOrStalemate();
+        
+        // Switch players 
+        if (document.getElementById('winCondition').style.display !== 'block') {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            document.getElementById('turnIndicator').textContent = 
+                                        'Player ' + currentPlayer + '\'s Turn';
+        }
+    }
+}
+
+startButton.addEventListener('click', () => {
+    document.querySelectorAll('.square').forEach(square => {
+        square.textContent = '';
+        square.addEventListener('click', handleSquareClick);
+    });
+    currentPlayer = Math.random() < 0.5 ? 'X' : 'O';
+    document.getElementById('turnIndicator').textContent = 'Player ' 
+                                                + currentPlayer + '\'s Turn';
+    document.getElementById('winCondition').style.display = 'none';
+});
+
+
+</script>
+
+</body>
+</html>
