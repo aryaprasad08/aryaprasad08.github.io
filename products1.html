@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        pre {
+            background-color: #e9e9e9;
+            padding: 20px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body> 
+    <h2>Products JSON String</h2>
+    <pre id="jsonOutput"></pre>
+    <script>
+        const products = [
+            {name: "Vintage T-shirt", description: "Tie-die Grateful Dead T-shirt", price: "$35", categories: ["clothing", "vintage"]},
+            {name: "Antique Desk Lamp", description: "Brass desk lamp from the 1920s", price: "$120", categories: ["home decor", "vintage"]},
+            {name: "Leather Wallet", description: "Handmade leather wallet with multiple compartments", price: "$50", categories: ["accessories"]},
+            {name: "Espresso Machine", description: "Italian espresso machine with steam wand", price: "$450", categories: ["kitchen appliances"]},
+            {name: "Smart Watch", description: "Latest model smart watch with health tracking", price: "$199", categories: ["electronics", "accessories"]},
+            {name: "Yoga Mat", description: "Eco-friendly, non-slip yoga mat", price: "$30", categories: ["sporting goods"]},
+            {name: "Graphic Novel", description: "Limited edition graphic novel, hardcover", price: "$60", categories: ["books"]},
+            {name: "Bluetooth Speaker", description: "Portable, waterproof Bluetooth speaker", price: "$89", categories: ["electronics"]},
+            {name: "Coffee Beans", description: "Single-origin coffee beans, 1lb bag", price: "$15", categories: ["kitchen appliances", "grocery"]},
+            {name: "Water Bottle", description: "Insulated stainless steel water bottle, 32oz", price: "$25", categories: ["sporting goods"]}
+        ];
+
+        // Convert the JSON to a string and display it in the 'jsonOutput' element
+        document.getElementById('jsonOutput').textContent = JSON.stringify(products, null, 2);
+    </script>
+</body>
+</html>
